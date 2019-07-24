@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      background: black;
+      opacity: 0.3;
+      width: 100%;
+      height: 100%;
+      top: 2px;
+      left: 2px;
+    }
+  
+    .restart {
+      position: absolute;
+      background-color: red;
+      border: none;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      z-index: 2;
+    }
+
+    #flappy {
+      position: absolute;
+      top: 8px;
+      border: 2px solid grey;
+    }
+
+    #score {
+      margin: 20px;
+    }
+
+    .toppscore {
+      margin-left: 50px;
+      margin-top:20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="overlay"></div>
+    <button class="restart">
+        Trykk Space for å starte
+    </button>
+  </div>
+    
+  <canvas id="flappy"></canvas>
+  <div class="toppscore">
+    <h2>Toppscore:</h2>
+    <ol id="score"></ol>
+  </div>
+
+  <script src="main.js" type="module"></script>
+</body>
+</html>
