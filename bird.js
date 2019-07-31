@@ -36,9 +36,11 @@ class Component {
 
   hitBottom() {
     const rockbottom = this.canvas.height - this.height;
-    if (this.y > rockbottom) {
+    if (this.y >= rockbottom) {
       this.y = rockbottom;
+      return true
     }
+    return false
   }
 
   hitRoof() {

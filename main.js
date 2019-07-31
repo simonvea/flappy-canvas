@@ -1,8 +1,8 @@
 import Component from './bird.js';
 import GameArea from './game.js';
 
-const CANVAS_WIDTH = 300;
-const CANVAS_HEIGHT = 300;
+const CANVAS_WIDTH = window.innerWidth < 800 ? window.innerWidth: 800;
+const CANVAS_HEIGHT = window.innerHeight < 800 ? window.innerHeight - 40: 800;
 const FLAPPY_WIDTH = CANVAS_WIDTH/10;
 const FLAPPY_HEIGHT = CANVAS_HEIGHT/10;
 
@@ -20,15 +20,15 @@ const canvas = document.getElementById('flappy');
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 
-const FlappyGame = new GameArea(canvas);
-let Flappy = new Component(50, 50, 'green', 20, 250, canvas);
-let Score = new Component("30px", "Consolas", "black", 350, 40, canvas, "text");
+const FlappyGame = new GameArea(canvas, Math.round(FLAPPY_WIDTH*1.5));
+let Flappy = new Component(FLAPPY_WIDTH, FLAPPY_HEIGHT, 'green', 20, CANVAS_HEIGHT/2, canvas);
+let Score = new Component("20px", "Consolas", "black", CANVAS_WIDTH - CANVAS_WIDTH/3, 20, canvas, "text");
 const scores = [];
 
 function updateGame(game, player, score) {
   if(game.obstacles.length > 1){
     for(let obstacle of game.obstacles) {
-      if(player.crashWith(obstacle)) {
+      if(player.crashWith(obstacle) || player.hitBottom()) {
         game.stop();
         restartBtn.style.left = (CANVAS_WIDTH / 2 - 33) + 'px';
         restartBtn.style.display = 'block';
@@ -55,7 +55,7 @@ function updateGame(game, player, score) {
     const maxGap = FLAPPY_HEIGHT * 4;
     const gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
     game.obstacles.push(new Component(10, height, "red", x, 0, game.canvas));
-    game.obstacles.push(new Component(10, x - height - gap, "red", x, height + gap, game.canvas));
+    game.obstacles.push(new Component(10, CANVAS_HEIGHT - height - gap, "red", x, height + gap, game.canvas));
     if(game.obstacles.length > 7) {
       game.obstacles.shift();
     }
