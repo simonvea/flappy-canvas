@@ -75,23 +75,37 @@ function updateGame(game, player, score) {
   }
 }
 
+function handleClick(e) {
+  e.preventDefault();
+  if(FlappyGame.isPlaying) {
+    Flappy.accelerate()
+  } else {
+    restartGame()
+  }
+}
+
+function handleClickEnd(e) {
+  e.preventDefault();
+  Flappy.clearGravity()
+}
+
 document.addEventListener('keypress', (e) => {
   if(e.charCode === 32) {
-    e.preventDefault();
-    if(FlappyGame.isPlaying) {
-      Flappy.accelerate()
-    } else {
-      restartGame()
-    }
+    handleClick(e);
   }
 })
+//canvas.addEventListener('touchstart', handleClick)
+canvas.addEventListener('mousedown', handleClick)
 
 document.addEventListener('keyup', (e) => {
   if(e.keyCode === 32) {
-    e.preventDefault();
-    Flappy.clearGravity()
+    handleClickEnd(e);
   }
 })
+
+canvas.addEventListener('touchend', handleClickEnd)
+canvas.addEventListener('mouseup', handleClickEnd)
+
 
 restartBtn.addEventListener('click', restartGame);
 
