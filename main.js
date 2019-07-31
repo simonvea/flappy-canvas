@@ -94,7 +94,7 @@ document.addEventListener('keypress', (e) => {
     handleClick(e);
   }
 })
-//canvas.addEventListener('touchstart', handleClick)
+canvas.addEventListener('touchstart', handleClick)
 canvas.addEventListener('mousedown', handleClick)
 
 document.addEventListener('keyup', (e) => {
