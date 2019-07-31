@@ -1,8 +1,10 @@
 import Component from './bird.js';
 import GameArea from './game.js';
 
-const CANVAS_WIDTH = 500;
-const CANVAS_HEIGHT = 500;
+const CANVAS_WIDTH = 300;
+const CANVAS_HEIGHT = 300;
+const FLAPPY_WIDTH = CANVAS_WIDTH/10;
+const FLAPPY_HEIGHT = CANVAS_HEIGHT/10;
 
 const overlay = document.querySelector('.overlay');
 const scoreBoard = document.getElementById('score');
@@ -47,10 +49,10 @@ function updateGame(game, player, score) {
   if (game.frameNo === 1 || everyinterval(game.obstacleInterval)) {
     const x = game.canvas.width;
     const minHeight = 20;
-    const maxHeight = 200;
+    const maxHeight = CANVAS_HEIGHT/3;
     const height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-    const minGap = 100;
-    const maxGap = 200;
+    const minGap = FLAPPY_HEIGHT * 2;
+    const maxGap = FLAPPY_HEIGHT * 4;
     const gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
     game.obstacles.push(new Component(10, height, "red", x, 0, game.canvas));
     game.obstacles.push(new Component(10, x - height - gap, "red", x, height + gap, game.canvas));
@@ -106,14 +108,13 @@ document.addEventListener('keyup', (e) => {
 canvas.addEventListener('touchend', handleClickEnd)
 canvas.addEventListener('mouseup', handleClickEnd)
 
-
 restartBtn.addEventListener('click', restartGame);
 
 function restartGame() {
   FlappyGame.stop()
   FlappyGame.clear()
-  Flappy = new Component(50,50,'green',20,250,canvas);
-  Score = new Component("30px", "Consolas", "black", 350, 40, canvas, "text");
+  Flappy = new Component(FLAPPY_WIDTH,FLAPPY_HEIGHT,'green',20,CANVAS_HEIGHT/2,canvas);
+  Score = new Component("20px", "Consolas", "black", CANVAS_WIDTH - CANVAS_WIDTH/3, 20, canvas, "text");
   FlappyGame.obstacles = [];
   restartBtn.style.display = 'none';
   restartBtn.innerText = 'Restart';

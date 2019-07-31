@@ -1,11 +1,11 @@
 
 class GameArea {
-  constructor(canvas) {
+  constructor(canvas, obstacleInterval = 70) {
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
     this.isPlaying = false;
     this.obstacles = [];
-    this.obstacleInterval = 100;
+    this.obstacleInterval = obstacleInterval;
   }
 
   start(updateFunc) {
